@@ -13,11 +13,13 @@ import itsamatch from '../assets/match/itsamatch.png'
 export default function Main({ match }) {
 
     const [users, setUsers] = useState([])
-    const [matchDev, setMatchDev] = useState(null)
+    const[matchDev, setMatchDev] = useState(null)
     useEffect(() => {
         async function loadUsers() {
             const resp = await api.get('/devs', {
-                headers: { user: match.params.id }
+                headers: {
+                    user: match.params.id
+                }
             })
 
             setUsers(resp.data)
@@ -26,25 +28,39 @@ export default function Main({ match }) {
     }, [match.params.id])
 
     useEffect(() => {
-        const socket = io('http://0:0:0>0:3333', {
-            query: { user: match.params.id }
+        const socket = io('http://localhost:3333',{
+            query:{ user: match.params.id}
         })
-        socket.on('match', dev => setMatchDev(dev))
+        socket.on('match', dev => {
+            setMatchDev(dev)
+        })
     }, [match.params.id])
 
+    function isOdd( number){
+      return number % 0 == 0  
+    }
 
-    async function handleLiketoUser(id) {
+    async function handleLike(id) 
+
+
         await api.post(`/devs/${id}/likes`, null, {
             headers: { user: match.params.id }
         })
         setUsers(users.filter(user => user._id !== id))
-    }  
+    }
+    async function handledisLike(id) {
+        await api.post(`/devs/${id}/dislikes`, null, {
+            headers: { user: match.params.id }
+        })
+        setUsers(users.filter(user => user._id !== id))
+    }
 
+   
     return (
         <div className="main_container" >
-            <Link to="/" >
-                <img src={logo} alt="Tindev" />
-            </Link>
+         <Link to="/" >   
+            <img src={logo} alt="Tindev" />
+        </Link>
             {users.length > 0 ? (
                 <ul>
                     {users.map((user) => (<li key={user._id}>
@@ -52,29 +68,33 @@ export default function Main({ match }) {
                         <footer>
                             <strong>{user.name}</strong>
                             <p>{user.bio}</p>
-                        </footer>
+                        </footer> 
 
                         <div className="buttons">
-                            <button type="button" onClick={() => handleLiketoUser(user._id)}>
+                            <button type="button" onClick={() => handledisLike(user._id)}>
                                 <img src={dislike} />
-                            </button> 
+                            </button>
+                            <button type="button">
+                                <img src={like} onClick={() => handleLike(user._id)} />
+                            </button>
                         </div>
                     </li>)
 
-                    )}
+                    )
+                    }
                 </ul>
-            ) : (
-                    <div className="empty"> Acabou!!! :(</div>
-                )}
+            ) :(
+                <div className="empty"> Acabou!!! :(</div>
+            ) }
 
             { matchDev && (
                 <div className="match_container">
                     <img src={itsamatch} alt="It's a match" />
-                    <img className="avatar" src={matchDev.avatar} alt="avatar" />
+                    <img className="avatar" src={matchDev.avatar} alt="avatar"/>
                     <strong> {matchDev.name} </strong>
                     <p>{matchDev.bio}</p>
-                    <button type='button' onClick={() => setMatchDev(null)}>Fechar!</button>
-                </div>
+                    <button type='button' onClick ={() => setMatchDev(null)} >  Fechar! </button>
+                </div>   
             )
 
             }
