@@ -36,13 +36,11 @@ export default function Main({ match }) {
         })
     }, [match.params.id])
 
-    function isOdd( number){
-      return number % 0 == 0  
+    function isEvenorOdd( n){
+      return n % 0 == 0  
     }
 
-    async function handleLike(id) 
-
-
+    async function handleLike(id) {
         await api.post(`/devs/${id}/likes`, null, {
             headers: { user: match.params.id }
         })
