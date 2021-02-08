@@ -37,7 +37,7 @@ export default function Main({ match }) {
     }, [match.params.id])
 
 
-    async function handleLike(id) {
+    async function handleLiketoUser(id) {
         await api.post(`/devs/${id}/likes`, null, {
             headers: { user: match.params.id }
         })
@@ -66,7 +66,7 @@ export default function Main({ match }) {
                         </footer> 
 
                         <div className="buttons">
-                            <button type="button" onClick={() => handledisLike(user._id)}>
+                            <button type="button" onClick={() => handleLiketoUser(user._id)}>
                                 <img src={dislike} />
                             </button>
                             <button type="button">
