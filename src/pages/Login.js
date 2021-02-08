@@ -8,7 +8,7 @@ export default function Login({ history }) {
 
     async function handlesubmit(e) {
         e.preventDefault()
-        
+
         const resp = await api.post('/devs', { username, })
         console.log(resp)
 
@@ -24,11 +24,11 @@ export default function Login({ history }) {
             <form onSubmit={handlesubmit} >
                 <img src={logo} alt="TindDev" />
                 <input
-                    placeholder="Digite o seu usuario do github"
+                    placeholder="Insira o seu usuario do github"
                     value={username}
                     onChange={event => { setUsername(event.target.value) }}
                 />
-                <button type="submit" > Enviar</button>
+                <button type="submit" >Enviar</button>
             </form>
         </div>
     );
