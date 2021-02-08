@@ -53,7 +53,10 @@ export default function Main({ match }) {
         setUsers(users.filter(user => user._id !== id))
     }
 
-   
+    function isEven(number) {
+        return number % 2 == 0
+    }
+
     return (
         <div className="main_container" >
          <Link to="/" >   
