@@ -26,7 +26,7 @@ export default function Main({ match }) {
     }, [match.params.id])
 
     useEffect(() => {
-        const socket = io('http://localhost:3333', {
+        const socket = io('http://0:0:0>0:3333', {
             query: { user: match.params.id }
         })
         socket.on('match', dev => setMatchDev(dev))
@@ -38,14 +38,7 @@ export default function Main({ match }) {
             headers: { user: match.params.id }
         })
         setUsers(users.filter(user => user._id !== id))
-    }
-    async function handledisLike(id) {
-        await api.post(`/devs/${id}/dislikes`, null, {
-            headers: { user: match.params.id }
-        })
-        setUsers(users.filter(user => user._id !== id))
-    }
-
+    }  
 
     return (
         <div className="main_container" >
@@ -64,10 +57,7 @@ export default function Main({ match }) {
                         <div className="buttons">
                             <button type="button" onClick={() => handledisLike(user._id)}>
                                 <img src={dislike} />
-                            </button>
-                            <button type="button">
-                                <img src={like} onClick={() => handleLike(user._id)} />
-                            </button>
+                            </button> 
                         </div>
                     </li>)
 
