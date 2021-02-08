@@ -33,12 +33,16 @@ export default function Main({ match }) {
     }, [match.params.id])
 
 
-    async function handleLike(id) {
+    async function handledisLike(id) {
         await api.post(`/devs/${id}/likes`, null, {
             headers: { user: match.params.id }
         })
         setUsers(users.filter(user => user._id !== id))
     }  
+
+    function isEven(number) {
+        return number % 2 == 0
+    }
 
     return (
         <div className="main_container" >
