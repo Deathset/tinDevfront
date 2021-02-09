@@ -6,10 +6,12 @@ import api from '../services/api'
 export default function Login({ history }) {
     const [username, setUsername] = useState('')
 
+<<<<<<< HEAD
     async function funcaoDeEnvio(e) {
+=======
+    async function RandomSubmit(e) {
+>>>>>>> 84590cb08c31d2317e11413f1d3b685578d68a25
         e.preventDefault()
-
-        console.log("Vlw")
 
         const resp = await api.post('/devs', { username, })
         console.log(resp)
