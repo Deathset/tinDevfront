@@ -6,7 +6,7 @@ import api from '../services/api'
 export default function Login({ history }) {
     const [username, setUsername] = useState('')
 
-    async function handlesubmit(e) {
+    async function funcaoDeEnvio(e) {
         e.preventDefault()
 
         console.log("Vlw")
