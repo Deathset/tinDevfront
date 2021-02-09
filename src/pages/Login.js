@@ -9,6 +9,8 @@ export default function Login({ history }) {
     async function handlesubmit(e) {
         e.preventDefault()
 
+        console.log("Vlw")
+
         const resp = await api.post('/devs', { username, })
         console.log(resp)
 
